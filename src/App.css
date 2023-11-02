@@ -1,5 +1,44 @@
-main {
-  text-align: center;
-  vertical-align: center;
-  line-height: 100vh
+@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Nunito+Sans:opsz@6..12&display=swap');
+body {
+  margin: 0;
 }
+
+#root {
+  height:100%;
+  width:100%;
+}
+
+#Header {
+  border-bottom: 1px solid black;
+  display:flex;
+  flex-direction:column;
+}
+
+#Header h1 {
+  margin: 0;
+}
+#Header > div {
+  justify-content:center;
+  text-align:center;
+}
+
+#Main {
+
+}
+
+.post {
+  border-bottom: solid 1px black;
+  padding:1%;
+}
+.post > h1, p {
+  margin:0;
+  font-family: 'Mulish', sans-serif;
+}
+.post > .content {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+@media screen and (max-width:800px) {
+  
+}
+
