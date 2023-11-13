@@ -12,26 +12,48 @@ body {
   border-bottom: 1px solid black;
   display:flex;
   flex-direction:column;
+  padding:1%;
+  background-color:black;
+  box-shadow: 0px 4px 5px 4px black;
+  user-select:none;
 }
 
 #Header h1 {
   margin: 0;
+  font-family: 'Mulish', sans-serif;
+  color:white;
+  text-shadow: 0px 0px 5px white,0px 0px 5px white;
 }
 #Header > div {
   justify-content:center;
   text-align:center;
 }
 
-#Main {
+.tag {
+  border: 1px solid black;
+  border-radius:50vw;
+  padding: 1vh;
+  font-size:75%;
+  margin:0.5vh;
+}
 
+.postbutton {
+  margin:0.5%;
+  border-radius:50vh;
+  color:white;
+  border: 1px solid white;
+  background-color:black;
+}
+
+.postbuttonallposts {
+  cursor: pointer;
 }
 
 .post {
-  border-bottom: solid 1px black;
-  padding:1%;
+  padding:0.5%;
 }
-.post > h1, p {
-  margin:0;
+.post {
+  margin:1%;
   font-family: 'Mulish', sans-serif;
 }
 .post > .content {
