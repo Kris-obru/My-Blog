@@ -1,9 +1,10 @@
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useParams, BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 import { getAuth, signOut } from 'firebase/auth';
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, collection, getDoc } from "firebase/firestore";
+
 
 import Blog from "./pages/blog/blog"
 import Header from "./pages/header/header"
@@ -13,9 +14,10 @@ import { app } from './Firebase'
 
 export default function App() {
 
-  const [id,setId] = useState(null)
-
+  const [id,setId] = useState()
   const [user,setUser] = useState()
+  const [config,setConfig] = useState()
+  
   const db = getFirestore(app);
 
   useEffect(() => {
@@ -26,11 +28,8 @@ export default function App() {
         signOut(auth);
       }
     };
-
-    // Add the beforeunload event listener
+    
     window.addEventListener('beforeunload', handleBeforeUnload);
-
-    // Clean up the beforeunload event listener when the component unmounts
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
@@ -39,10 +38,10 @@ export default function App() {
   
   return (
     <BrowserRouter>
-      <Header id={id} />
+      <Header id={id} setId={setId} user={user} setUser={setUser} db={db} config={config} setConfig={setConfig} />
         <Routes>
-          <Route path="/" element={<Blog id={id} setId={setId} user={user} setUser={setUser} db={db} />}/>
-          <Route path="/:id" element={<Blog id={id} setId={setId} user={user} setUser={setUser} db={db} />}/>
+          <Route path="/" element={<Blog id={id} setId={setId} user={user} setUser={setUser} db={db} config={config} setConfig={setConfig} />}/>
+          <Route path="/:id" element={<Blog id={id} setId={setId} user={user} setUser={setUser} db={db} config={config} setConfig={setConfig} />}/>
         </Routes>
     </BrowserRouter>
   )

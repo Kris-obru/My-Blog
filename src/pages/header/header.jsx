@@ -10,26 +10,20 @@ export default function Header(props) {
   const [hideLeft,setHideLeft] = useState(false)
   const [hideRight,setHideRight] = useState(false)
 
-  const [config, setConfig] = useState({"posts":3})
   
   useEffect(() => {
-    if(props.id != null) {
+    if(typeof props.config !== 'undefined') {
       if(props.id==0) {
         setHideRight(true)
       } else {
         setHideRight(false)
       }
-      if(props.id==config.posts-1) {
+      if(props.id==props.config.posts-1) {
         setHideLeft(true)
       } else {
         setHideLeft(false)
       }
     }
-
-    (async () => {
-      
-
-    })()
 
   },[props.id])
 
