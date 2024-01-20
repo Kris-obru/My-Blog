@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { doc, collection, getDocs, getDoc } from 'firebase/firestore';
 
 export default function Blog(props) {
   const [post, setPost] = useState();
   
   const { id } = useParams()
+  const navigate = useNavigate()
   
   useEffect(() => {
-    
     (async () => {
-      if(typeof props.config === 'undefined') {
-          const docRefConfig = doc(props.db,'posts','config')
-          const docConfig = await getDoc(docRefConfig).catch((err) => {
-            console.log(err)
-          })
-          props.setConfig(docConfig.data())
-        } else {
-          if (typeof id === 'undefined' || id > props.config.posts-1) {
-            props.setId(props.config.posts-1)
+        if(typeof props.config != 'undefined') {
+          if (!Number.isInteger(Number(id)) || !props.config.postarr.includes(Number(id))) {
+            navigate(`/${props.config.postarr[props.config.posts-1]}`)
           } else {
-            props.setId(id)
+            // let postIter = Number(id);
+            // while(props.config.privatePosts.includes(postIter) || !(postIter >= 0)) {
+            //   postIter-=1;
+            // } 
+            props.setId(Number(id))
           }
         }
       
-      if(typeof props.id != 'undefined') {
+      if(Number.isInteger(Number(props.id))) {
         const docRefPost = doc(props.db,'posts',`${props.id}`,)
         await getDoc(docRefPost)
         .then((docPost) => {
@@ -36,7 +34,7 @@ export default function Blog(props) {
       }
     })()
     
-  }, [props.id,props.config,id]);
+  }, [props.id,props.config,id,props.db]);
 
   if (!post) {
     // Loading state, you can show a loading spinner or message here
